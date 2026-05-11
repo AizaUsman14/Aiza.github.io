@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome | Midnight</title>
+<title>Dashboard</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -12,38 +12,63 @@ body {
     background: #050505;
     color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
-.container {
-    text-align: center;
+.sidebar {
+    width: 250px;
+    background: #111;
+    padding: 20px;
 }
-a {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 25px;
-    border: 1px solid white;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
+.main {
+    flex: 1;
+    padding: 20px;
 }
-a:hover {
-    background: white;
-    color: black;
+img {
+    width: 80px;
+    border-radius: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>MIDNIGHT SYSTEM</h1>
-    <p>Secure Login Portal</p>
+<div class="sidebar">
+    <h3>MIDNIGHT</h3>
 
-    <a href="login.html">Login</a>
-    <a href="register.html">Register</a>
+    <img id="profileImage">
+    <h5 id="userName"></h5>
+
+    <button onclick="logout()" class="btn btn-danger w-100 mt-3">Logout</button>
 </div>
+
+<div class="main">
+    <h2>Welcome, <span id="welcome"></span></h2>
+
+    <p><b>Address:</b> <span id="address"></span></p>
+    <p><b>Birthdate:</b> <span id="birthdate"></span></p>
+    <p><b>Education:</b> <span id="education"></span></p>
+</div>
+
+<script>
+const user = sessionStorage.getItem("loggedInUser");
+
+if(!user){
+    window.location.href = "login.html";
+}
+
+const data = JSON.parse(localStorage.getItem("user_" + user));
+
+document.getElementById("userName").innerText = data.username;
+document.getElementById("welcome").innerText = data.username;
+document.getElementById("address").innerText = data.address;
+document.getElementById("birthdate").innerText = data.birthdate;
+document.getElementById("education").innerText = data.education;
+document.getElementById("profileImage").src = data.profilePic;
+
+function logout(){
+    sessionStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+}
+</script>
 
 </body>
 </html>
