@@ -1,136 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Midnight</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: #fff; font-family: 'Outfit', sans-serif; display: flex; min-height: 100vh; margin: 0; }
-        
-        /* Floating Sidebar */
-        .sidebar-container { padding: 20px; width: 280px; display: flex; flex-direction: column; }
-        .sidebar { background: #111111; border: 1px solid #222; border-radius: 20px; height: 100%; padding: 30px 20px; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .brand { font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, #38bdf8, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 40px; text-align: center; }
-        
-        .user-widget { background: #1a1a1a; border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; border: 1px solid #333; margin-top: auto; }
-        .profile-img { width: 50px; height: 50px; border-radius: 12px; object-fit: cover; border: 1px solid #555; }
-        .placeholder-square { width: 50px; height: 50px; border-radius: 12px; background: #222; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 1px solid #444; }
-        .user-name { font-weight: 600; font-size: 1rem; color: #fff; margin: 0; word-break: break-all; }
-        
-        .logout-btn { width: 100%; background: transparent; color: #f87171; border: 1px solid #451a1a; padding: 12px; border-radius: 10px; font-weight: 500; transition: 0.2s; margin-top: 15px; }
-        .logout-btn:hover { background: #451a1a; border-color: #f87171; }
-
-        /* Main Content */
-        .main-content { flex: 1; padding: 20px 40px 20px 0; overflow-y: auto; }
-        .header-section { margin-bottom: 40px; padding-top: 20px; }
-        .welcome-text { font-size: 2.5rem; font-weight: 700; margin-bottom: 5px; }
-        .text-muted-dark { color: #9ca3af; }
-
-        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .dark-panel { background: #111111; border: 1px solid #222; border-radius: 20px; padding: 30px; position: relative; overflow: hidden; }
-        .dark-panel::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #38bdf8; }
-        .dark-panel.panel-purple::after { background: #a855f7; }
-        
-        .panel-label { color: #6b7280; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .panel-value { font-size: 1.5rem; font-weight: 500; color: #e5e7eb; }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar-container { width: 100%; padding: 15px; height: auto; }
-            .sidebar { height: auto; padding: 20px; }
-            .main-content { padding: 15px; }
-        }
-    </style>
-</head>
-<body>
-    <div class="sidebar-container">
-        <div class="sidebar">
-            <div class="brand">MIDNIGHT</div>
-            
-            <div class="user-widget">
-                <div id="imgContainer">
-                    <img id="profileImage" src="" class="profile-img" style="display:none;">
-                    <div id="noImage" class="placeholder-square">👤</div>
-                </div>
-                <div>
-                    <p class="user-name" id="userNameDisplay">...</p>
-                    <span style="font-size: 0.75rem; color: #10b981;">● Online</span>
-                </div>
-            </div>
-            <button onclick="logout()" class="logout-btn">Terminate Session</button>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="header-section">
-            <h1 class="welcome-text">Hello, <span id="welcomeName" style="color:#38bdf8;">...</span></h1>
-            <p class="text-muted-dark">Welcome to your encrypted local dashboard interface.</p>
-        </div>
-
-        <div class="data-grid">
-            <div class="dark-panel">
-                <span class="panel-label">Node Location</span>
-                <div id="userAddress" class="panel-value">...</div>
-            </div>
-            
-            <div class="dark-panel panel-purple">
-                <span class="panel-label">System Status</span>
-                <div class="panel-value" style="color: #a855f7;">Active & Secured</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const user = sessionStorage.getItem('loggedInUser');
-        if(!user) {
-            window.location.href = 'login.html';
-        } else {
-            const savedData = localStorage.getItem('user_' + user);
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                
-                document.getElementById('userNameDisplay').innerText = data.username;
-                document.getElementById('welcomeName').innerText = data.username;
-                document.getElementById('userAddress').innerText = data.address;
-                
-                if(data.profilePic) {
-                    document.getElementById('profileImage').src = data.profilePic;
-                    document.getElementById('profileImage').style.display = 'block';
-                    document.getElementById('noImage').style.display = 'none';
-                }
-            }
-        }
-
-        function logout() {
-            sessionStorage.removeItem('loggedInUser');
-            window.location.href = 'login.html';
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard | Midnight</title>
+<title>Welcome | Midnight</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-/* paste DASHBOARD styles */
+body {
+    background: #050505;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    text-align: center;
+}
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 25px;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+}
+a:hover {
+    background: white;
+    color: black;
+}
 </style>
 </head>
 
 <body>
 
-<!-- paste DASHBOARD layout -->
+<div class="container">
+    <h1>MIDNIGHT SYSTEM</h1>
+    <p>Secure Login Portal</p>
 
-<script>
-/* paste DASHBOARD JavaScript */
-</script>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+</div>
 
 </body>
 </html>
